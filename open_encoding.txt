@@ -1,0 +1,49 @@
+#python 读取文件时报错UnicodeDecodeError: 'gbk' codec can't decode byte 0xaa in position 134: illegal multibyte sequence
+解决方法1：FILE_OBJECT= open('order.log','r', encoding='UTF-8')
+解决方法2：FILE_OBJECT= open('order.log','rb')
+
+>>> helloFile = open('G:\\github\\work-notes\\essay\\git_pack.txt', 'r', encoding='UTF-8')
+
+>>> helloContent = helloFile.read()
+>>> helloContent
+"#git常用打包方法\n\n1.输出两个提交间的改变\n如果你需要输出某两个提交间的改变时，你可以使用这个。\ngit archive -o ../../latest.zip NEW_COMMIT_ID_HERE $(git diff --name-only
+OLD_COMMIT_ID_HERE NEW_COMMIT_ID_HERE)\n\nexample：\n老版本：a1fd4c1370b325328e47b048146c315fabe8040b\n新版本：1df8ffc72773de0973681e5467523239696f448a\ngit archive -o ../..
+/20180621.zip 1df8ffc72773 $(git diff --name-only a1fd4c1370b3 1df8ffc72773)\n\n针对已经删除的文件，用git archive 常用命令打包时会报错 fatal: pathspec 'xxx.html'did not matc
+h any files \n采用下面的命令进行打包 git archive -o hot-fix.zip HEAD $(git diff e6769a4...803dda4 --name-only|grep -v .html)\n\n参考：https://www.oschina.net/translate/10-us
+eful-advanced-git-commands?print\n      https://blog.csdn.net/xhzq1986/article/details/75327465\n\n2.git增量更新打包的方法\n最近遇到个问题：一个比较老的项目出现bug，需要更新
+。客户要求只能增量更新，所以打包的时候不可能一个一个文件找出来打包，这样效率太低，经过查找资料，git下找到一种办法如下：\ngit diff a1fd4c1370b3 1df8ffc72773 --name-only | xar
+gs tar -czvf update.tar.gz\n参考：https://blog.csdn.net/peterxiaoq/article/details/76174015\n\n\n"
+
+>>> pprint.pprint(helloContent)                                   
+('#git常用打包方法\n'                                                   
+ '\n'                                                             
+ '1.输出两个提交间的改变\n'                                                 
+ '如果你需要输出某两个提交间的改变时，你可以使用这个。\n'                                   
+ 'git archive -o ../../latest.zip NEW_COMMIT_ID_HERE $(git diff --
+ 'OLD_COMMIT_ID_HERE NEW_COMMIT_ID_HERE)\n'                       
+ '\n'                                                             
+ 'example：\n'                                                     
+ '老版本：a1fd4c1370b325328e47b048146c315fabe8040b\n'                 
+ '新版本：1df8ffc72773de0973681e5467523239696f448a\n'                 
+ 'git archive -o ../../20180621.zip 1df8ffc72773 $(git diff --name
+ 'a1fd4c1370b3 1df8ffc72773)\n'                                   
+ '\n'                                                             
+ "针对已经删除的文件，用git archive 常用命令打包时会报错 fatal: pathspec 'xxx.html'did 
+ 'any files \n'                                                   
+ '采用下面的命令进行打包 git archive -o hot-fix.zip HEAD $(git diff e6769a4..
+ '--name-only|grep -v .html)\n'                                   
+ '\n'                                                             
+ '参考：https://www.oschina.net/translate/10-useful-advanced-git-comm
+ '      https://blog.csdn.net/xhzq1986/article/details/75327465\n'
+ '\n'                                                             
+ '2.git增量更新打包的方法\n'                                               
+ '最近遇到个问题：一个比较老的项目出现bug，需要更新。客户要求只能增量更新，所以打包的时候不可能一个一个文件找出来打包，这样效率
+                                                                  
+ 'git diff a1fd4c1370b3 1df8ffc72773 --name-only | xargs tar -czvf
+ 'update.tar.gz\n'                                                
+ '参考：https://blog.csdn.net/peterxiaoq/article/details/76174015\n' 
+ '\n'                                                             
+ '\n')                                                            
+ 
+ 
+ 
